@@ -1,27 +1,47 @@
-'use strict';
+
 module.exports = {
-  up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('RentItems', {
-      id: {
-        allowNull: false,
-        autoIncrement: true,
-        primaryKey: true,
-        type: Sequelize.INTEGER
+  up: (queryInterface, Sequelize) => queryInterface.createTable('RentItems', {
+    id: {
+      allowNull: false,
+      autoIncrement: true,
+      primaryKey: true,
+      type: Sequelize.INTEGER,
+    },
+    name: {
+      type: Sequelize.STRING,
+    },
+    userId: {
+      type: Sequelize.INTEGER,
+    },
+    description: {
+      type: Sequelize.TEXT,
+    },
+    price: {
+      type: Sequelize.DECIMAL(12, 2),
+    },
+    address: {
+      type: Sequelize.STRING,
+    },
+    imageUrl: {
+      type: Sequelize.STRING,
+      validate: {
+        isUrl: {
+          msg: 'imageUrl must be a valid URL',
+        },
       },
-      name: {
-        type: Sequelize.STRING
-      },
-      createdAt: {
-        allowNull: false,
-        type: Sequelize.DATE
-      },
-      updatedAt: {
-        allowNull: false,
-        type: Sequelize.DATE
-      }
-    });
-  },
-  down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('RentItems');
-  }
+    },
+    status: {
+      type: Sequelize.ENUM('open', 'rented'),
+      defaultValue: 'open',
+    },
+    createdAt: {
+      allowNull: false,
+      type: Sequelize.DATE,
+    },
+    updatedAt: {
+      allowNull: false,
+      type: Sequelize.DATE,
+    },
+  }),
+  down: (queryInterface, Sequelize) => queryInterface.dropTable('RentItems'),
 };
