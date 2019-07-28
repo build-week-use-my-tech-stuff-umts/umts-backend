@@ -6,6 +6,25 @@
   "repository": "git@github.com:build-week-use-my-tech-stuff-umts/umts-backend.git",
   "author": "Orie Chinedu <oriechinedu@gmail.com>",
   "license": "MIT",
+  "scripts": {
+    "migrate": "sequelize db:migrate",
+    "migrate:reset": "sequelize db:migrate:undo:all && npm run migrate",
+    "start:dev": "DEBUG=* nodemon --exec babel-node index.js",
+    "start": "babel-node index.js",
+    "test": "export NODE_ENV=test && jest --detectOpenHandles --testTimeout=10000 --forceExit",
+    "pretest": "export NODE_ENV=test && npm run migrate:reset",
+    "coveralls": "npm run pretest && jest --coverage --detectOpenHandles --testTimeout=10000 && cat ./coverage/lcov.info | coveralls"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "coveragePathIgnorePatterns": [
+      "/node_modules/",
+      "/helpers/*",
+      "/models/*"
+    ],
+    "collectCoverage": true,
+    "verbose": true
+  },
   "dependencies": {
     "@babel/core": "^7.4.5",
     "@babel/node": "^7.4.5",
