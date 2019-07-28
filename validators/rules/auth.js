@@ -22,6 +22,7 @@ export const registerValidationRules = () => [
     .isLength({ min: 6 })
     .withMessage('Password must not be less than 6 characters'),
   body('phone')
+    .optional({ nullable: true })
     .isMobilePhone()
     .withMessage('Invalid phone number'),
 ];
