@@ -4,6 +4,7 @@
 
 # Api Docs
 
+> BASE_URL : https://umts-backend.herokuapp.com/api/
 <pre>
 <h3>Register</h3>
 <code>
