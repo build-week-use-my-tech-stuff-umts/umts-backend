@@ -1,0 +1,9 @@
+{
+  "name": "umts-backend",
+  "version": "1.0.0",
+  "description": "Api for use-my-tech-stuff - A platform for users to rent items directly from the owners without paying extra cost to middlemen",
+  "main": "index.js",
+  "repository": "git@github.com:build-week-use-my-tech-stuff-umts/umts-backend.git",
+  "author": "Orie Chinedu <oriechinedu@gmail.com>",
+  "license": "MIT"
+}
