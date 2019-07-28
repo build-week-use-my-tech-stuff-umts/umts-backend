@@ -6,9 +6,37 @@
   "repository": "git@github.com:build-week-use-my-tech-stuff-umts/umts-backend.git",
   "author": "Orie Chinedu <oriechinedu@gmail.com>",
   "license": "MIT",
+  "dependencies": {
+    "@babel/core": "^7.4.5",
+    "@babel/node": "^7.4.5",
+    "@babel/plugin-proposal-class-properties": "^7.5.5",
+    "@babel/plugin-proposal-throw-expressions": "^7.2.0",
+    "@babel/plugin-transform-runtime": "^7.5.5",
+    "@babel/preset-env": "^7.4.5",
+    "@babel/runtime": "^7.5.5",
+    "babel-plugin-transform-async-to-generator": "^6.24.1",
+    "bcrypt": "^3.0.6",
+    "cors": "^2.8.5",
+    "debug": "^4.1.1",
+    "dotenv": "^8.0.0",
+    "express": "^4.17.1",
+    "express-error-bouncer": "^1.0.1",
+    "express-validator": "^6.1.1",
+    "jsonwebtoken": "^8.5.1",
+    "pg": "^7.11.0",
+    "pg-hstore": "^2.3.3",
+    "sequelize": "^5.10.3",
+    "sequelize-cli": "^5.5.0"
+  },
   "devDependencies": {
+    "@babel/plugin-syntax-dynamic-import": "^7.2.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "coveralls": "^3.0.5",
     "eslint": "^5.16.0",
     "eslint-config-airbnb-base": "^13.2.0",
-    "eslint-plugin-import": "^2.18.2"
+    "eslint-plugin-import": "^2.18.2",
+    "jest": "^24.8.0",
+    "nodemon": "^1.19.1",
+    "supertest": "^4.0.2"
   }
 }
