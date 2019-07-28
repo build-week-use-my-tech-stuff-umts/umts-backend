@@ -9,4 +9,6 @@ const formatResponse = (res, payload, statusCode = 200) => res.status(statusCode
   ...payload,
 });
 
-export default formatResponse;
+export default {
+  formatResponse,
+};
