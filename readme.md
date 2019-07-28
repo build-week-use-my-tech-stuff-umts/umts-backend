@@ -1,3 +1,3 @@
 # Use My Tech Stuff
 
-[![Build Status](https://travis-ci.org/build-week-use-my-tech-stuff-umts/umts-backend.svg?branch=develop)](https://travis-ci.org/build-week-use-my-tech-stuff-umts/umts-backend) [![Coverage Status](https://coveralls.io/repos/github/build-week-use-my-tech-stuff-umts/umts-backend/badge.svg?branch=develop)](https://coveralls.io/github/build-week-use-my-tech-stuff-umts/umts-backend?branch=develop)
+[![Build Status](https://travis-ci.org/build-week-use-my-tech-stuff-umts/umts-backend.svg?branch=develop)](https://travis-ci.org/build-week-use-my-tech-stuff-umts/umts-backend) [![Coverage Status](https://coveralls.io/repos/github/build-week-use-my-tech-stuff-umts/umts-backend/badge.svg?branch=develop)](https://coveralls.io/github/build-week-use-my-tech-stuff-umts/umts-backend?branch=develop) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
