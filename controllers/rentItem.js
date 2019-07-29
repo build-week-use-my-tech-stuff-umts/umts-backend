@@ -89,3 +89,24 @@ export const deleteRentItem = async (req, res, next) => {
     next(error);
   }
 };
+
+export const getCategoryItems = async (req, res, next) => {
+  try {
+    const { catId } = req.params;
+    const category = await models.Category.findOne({
+      where: { id: catId },
+      include: [
+        {
+          model: models.RentItem,
+          as: 'rentItems',
+        },
+      ],
+    });
+    if (!category) {
+      throw new ErrorHandler(404, 'Category with the specified ID does not exist');
+    }
+    response(res, { category, message: 'success' }, 200);
+  } catch (error) {
+    next(error);
+  }
+};

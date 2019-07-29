@@ -5,6 +5,7 @@ module.exports = {
       {
         userId: 1,
         name: 'Camera',
+        catId: 1,
         description:
             'Vivamus metus arcu, adipiscing molestie, hendrerit at, vulputate vitae, nisl. Aenean lectus.',
         price: 65.34,
@@ -17,6 +18,7 @@ module.exports = {
       {
         userId: 2,
         name: 'HP Projector',
+        catId: 4,
         description: 'Mauris enim leo, rhoncus sed, vestibulum sit amet, cursus id, turpis.',
         price: 96.37,
         address: '0491 Ridgeview Crossing',
@@ -28,6 +30,7 @@ module.exports = {
       {
         userId: 3,
         name: 'Desktop Computer',
+        catId: 4,
         description:
             'Maecenas rhoncus aliquam lacus. Morbi quis tortor id nulla ultrices aliquet.',
         price: 64.08,
@@ -39,7 +42,8 @@ module.exports = {
       },
       {
         userId: 4,
-        name: 'Car',
+        name: 'Speaker',
+        catId: 3,
         description:
             'Donec quis orci eget orci vehicula condimentum. Curabitur in libero ut massa volutpat convallis.',
         price: 55.13,
@@ -51,7 +55,8 @@ module.exports = {
       },
       {
         userId: 5,
-        name: 'Car',
+        name: 'Plasma',
+        catId: 2,
         description: 'Pellentesque viverra pede ac diam. Cras pellentesque volutpat dui.',
         price: 64.03,
         address: '3 Corry Junction',
@@ -63,6 +68,7 @@ module.exports = {
       {
         userId: 4,
         name: 'Motorbike',
+        catId: 5,
         description: 'Integer ac leo. Pellentesque ultrices mattis odio.',
         price: 75.44,
         address: '64 Waxwing Avenue',
@@ -73,7 +79,8 @@ module.exports = {
       },
       {
         userId: 3,
-        name: 'Motorbike',
+        name: 'VR Camera',
+        catId: 1,
         description:
             'Suspendisse ornare consequat lectus. In est risus, auctor sed, tristique in, tempus sit amet, sem.',
         price: 53.46,
@@ -86,6 +93,7 @@ module.exports = {
       {
         userId: 3,
         name: 'Party Hall',
+        catId: 5,
         description:
             'Fusce posuere felis sed lacus. Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl.',
         price: 81.09,
@@ -98,6 +106,7 @@ module.exports = {
       {
         userId: 1,
         name: 'Portable Canopy',
+        catId: 5,
         description: 'Duis bibendum. Morbi non quam nec dui luctus rutrum.',
         price: 64.6,
         address: '96 Chinook Way',
@@ -109,6 +118,7 @@ module.exports = {
       {
         userId: 2,
         name: 'Microphone',
+        catId: 3,
         description: 'Vivamus in felis eu sapien cursus vestibulum.',
         price: 87.53,
         address: '149 Leroy Lane',

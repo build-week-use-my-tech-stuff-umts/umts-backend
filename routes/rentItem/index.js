@@ -7,6 +7,7 @@ import {
   getRentItemById,
   updateRentItem,
   deleteRentItem,
+  getCategoryItems,
 } from '../../controllers/rentItem';
 import isAuthenticated from '../../middleware/auth';
 import validateItemId from '../../middleware/rentItem';
@@ -26,4 +27,5 @@ router.put(
 );
 
 router.delete('/rentItems/:itemId', isAuthenticated, validateItemId, deleteRentItem);
+router.get('/rentItems/categories/:catId', getCategoryItems);
 export default router;

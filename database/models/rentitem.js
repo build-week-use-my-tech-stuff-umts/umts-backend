@@ -20,6 +20,10 @@ module.exports = (sequelize, DataTypes) => {
       as: 'owner',
       onDelete: 'CASCADE',
     });
+    RentItem.belongsTo(models.Category, {
+      foreignKey: 'catId',
+      as: 'category',
+    });
     RentItem.hasMany(models.Review, {
       foreignKey: 'userId',
       as: 'reviews',
