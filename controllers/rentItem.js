@@ -1,7 +1,6 @@
 import { ErrorHandler } from 'express-error-bouncer';
 import models from '../database/models';
 import response from '../helpers';
-import { async } from '../../../../Library/Caches/typescript/3.5/node_modules/rxjs/internal/scheduler/async';
 
 /**
  *
@@ -86,36 +85,6 @@ export const deleteRentItem = async (req, res, next) => {
       throw new ErrorHandler(500, 'An Unknown error occurred while trying to  the item');
     }
     response(res, { message: 'success' }, 200);
-  } catch (error) {
-    next(error);
-  }
-};
-
-export const getCategoryItems = async (req, res, next) => {
-  try {
-    const { catId } = req.params;
-    const category = await models.Category.findOne({
-      where: { id: catId },
-      include: [
-        {
-          model: models.RentItem,
-          as: 'rentItems',
-        },
-      ],
-    });
-    if (!category) {
-      throw new ErrorHandler(404, 'Category with the specified ID does not exist');
-    }
-    response(res, { category, message: 'success' }, 200);
-  } catch (error) {
-    next(error);
-  }
-};
-
-export const getAllCategories = async (req, res, next) => {
-  try {
-    const categories = await models.Category.findAll();
-    response(res, { categories }, 200);
   } catch (error) {
     next(error);
   }
