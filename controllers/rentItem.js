@@ -52,34 +52,24 @@ export const getAllItems = async (req, res, next) => {
 
 export const getRentItemById = async (req, res, next) => {
   try {
-    const { itemId } = req.params;
-    const item = await models.RentItem.findOne({
-      where: { id: itemId },
-      include: [
-        {
-          model: models.User,
-          as: 'owner',
-          attributes: ['id', 'firstName', 'lastName'],
-        },
-        {
-          model: models.Review,
-          as: 'reviews',
-          attributes: ['id', 'comment', 'rating'],
-          include: [
-            {
-              model: models.User,
-              as: 'reviewer',
-              attributes: ['id', 'firstName', 'lastName'],
-            },
-          ],
-        },
-      ],
-    });
-    if (!item) {
-      throw new ErrorHandler(404, 'Item with the specified Id does not exist');
-    }
-    response(res, { item, message: 'success' }, 200);
+    response(res, { item: req.rentItem, message: 'success' }, 200);
   } catch (error) {
     return next(error);
+  }
+};
+
+export const updateRentItem = async (req, res, next) => {
+  try {
+    const { rentItem, user, body } = req;
+    if (rentItem.owner.id !== user.id) {
+      throw new ErrorHandler(400, 'You can only update your own item');
+    }
+    const updatedItem = await rentItem.update(body);
+    if (!updatedItem) {
+      throw new ErrorHandler(500, 'An Unknown error occurred while trying to update the item');
+    }
+    response(res, { item: updatedItem }, 200);
+  } catch (error) {
+    next(error);
   }
 };

@@ -5,48 +5,5 @@
 # Api Docs
 
 > BASE_URL : https://umts-backend.herokuapp.com/api/
-<pre>
-<h3>Register</h3>
-<code>
-Access: Public
-Method: POST
-Route: auth/register
-Payload: {
-   "firstName": String,
-   "lastName": String
-   "email": String
-   "password": String
-   "phone": String
-   "street": String
-   "city": String
-   "state": String
-   "avatarUrl": String
-}
 
-*Required Fields [firstName, lastName, email, password]
-
-Response : {
-    "message": "success",
-    "user": Object //user object
-}
-
-</code>
-</pre>
-
-<pre>
-<h3>Login </h3>
-<code>
-Access: Public
-Method: POST
-Route: auth/login
-Payload: {
-	"email": String
-  "password": String
-}
-
-Response : {
-    "user": Object // user data
-    "token": String //jwt
-}
-</code>
-</pre>
+> [Link to the API documentation](https://documenter.getpostman.com/view/4448465/SVYkw1n2?version=latest)
