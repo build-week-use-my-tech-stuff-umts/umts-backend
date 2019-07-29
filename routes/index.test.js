@@ -6,4 +6,8 @@ describe('Server [GET /api]', () => {
     const { statusCode } = await request(server).get('/api');
     expect(statusCode).toEqual(200);
   });
+  it('should respond with status code 500 if there is internal server error', async () => {
+    const { statusCode } = await request(server).get('/api/error');
+    expect(statusCode).toEqual(500);
+  });
 });
