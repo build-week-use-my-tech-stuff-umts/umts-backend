@@ -18,7 +18,7 @@ export const addNewItem = async (req, res, next) => {
     }
     return response(res, { item }, 201);
   } catch (error) {
-    next(error);
+    return next(error);
   }
 };
 
@@ -42,12 +42,44 @@ export const getAllItems = async (req, res, next) => {
           as: 'reviews',
         },
       ],
-      order: [
-        ['createdAt', 'DESC'],
-      ],
+      order: [['createdAt', 'DESC']],
     });
     return response(res, { rentItems: items, message: 'success' }, 200);
   } catch (error) {
-    next(error);
+    return next(error);
+  }
+};
+
+export const getRentItemById = async (req, res, next) => {
+  try {
+    const { itemId } = req.params;
+    const item = await models.RentItem.findOne({
+      where: { id: itemId },
+      include: [
+        {
+          model: models.User,
+          as: 'owner',
+          attributes: ['id', 'firstName', 'lastName'],
+        },
+        {
+          model: models.Review,
+          as: 'reviews',
+          attributes: ['id', 'comment', 'rating'],
+          include: [
+            {
+              model: models.User,
+              as: 'reviewer',
+              attributes: ['id', 'firstName', 'lastName'],
+            },
+          ],
+        },
+      ],
+    });
+    if (!item) {
+      throw new ErrorHandler(404, 'Item with the specified Id does not exist');
+    }
+    response(res, { item, message: 'success' }, 200);
+  } catch (error) {
+    return next(error);
   }
 };

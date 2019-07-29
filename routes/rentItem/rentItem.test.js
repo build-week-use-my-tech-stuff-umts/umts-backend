@@ -1,6 +1,5 @@
 import request from 'supertest';
 import server from '../../api/server';
-import { async } from '../../../../../Library/Caches/typescript/3.5/node_modules/rxjs/internal/scheduler/async';
 
 const itemData = {
   name: 'tes',
@@ -15,7 +14,7 @@ const userData = {
   firstName: 'test',
   lastName: 'test',
 };
-let authToken = null;
+let authToken;
 const BaseUrl = '/api/rentItems';
 
 beforeAll(async () => {
@@ -26,6 +25,7 @@ beforeAll(async () => {
     .post('/api/auth/login')
     .send(userData);
   authToken = body.token;
+  console.log('token', authToken);
 });
 
 describe('RentItem Endpoints', () => {
@@ -49,12 +49,22 @@ describe('RentItem Endpoints', () => {
     expect(statusCode).toEqual(422);
     expect(body).toHaveProperty('errors');
   });
-  it('should create a new rent item if validation passess', async () => {
+  it('should create a new rent item if validation passes', async () => {
     const { statusCode, body } = await request(server)
       .post(BaseUrl)
       .set('Authorization', authToken)
       .send(itemData);
     expect(statusCode).toEqual(201);
     expect(body).toHaveProperty('item');
+  });
+  it('should respond with 404 if item does not exist', async () => {
+    const { statusCode } = await request(server)
+      .get(`${BaseUrl}/10`);
+    expect(statusCode).toEqual(404);
+  });
+  it('should respond with 200 if item exists', async () => {
+    const { statusCode } = await request(server)
+      .get(`${BaseUrl}/1`);
+    expect(statusCode).toEqual(200);
   });
 });
