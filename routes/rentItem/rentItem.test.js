@@ -18,14 +18,15 @@ let authToken;
 const BaseUrl = '/api/rentItems';
 
 beforeAll(async () => {
-  const res = await request(server)
+  jest.setTimeout(30000);
+
+  await request(server)
     .post('/api/auth/register')
     .send(userData);
   const { body } = await request(server)
     .post('/api/auth/login')
     .send({ email: userData.email, password: userData.password });
   authToken = body.token;
-  console.log(body, '====================hello world==============================');
 });
 
 describe('RentItem Endpoints', () => {
