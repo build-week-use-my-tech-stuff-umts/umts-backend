@@ -17,6 +17,10 @@ export default () => [
     .not()
     .isEmpty()
     .withMessage('The address of the item is required'),
+  body('catId')
+    .not()
+    .isEmpty()
+    .withMessage('The category ID of the item is required'),
   body('imageUrl')
     .not()
     .isEmpty()

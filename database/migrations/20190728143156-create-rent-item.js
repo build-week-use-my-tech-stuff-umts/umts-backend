@@ -14,6 +14,10 @@ module.exports = {
       type: Sequelize.INTEGER,
       allowNull: false,
     },
+    catId: {
+      type: Sequelize.INTEGER,
+      allowNull: false,
+    },
     description: {
       type: Sequelize.TEXT,
     },

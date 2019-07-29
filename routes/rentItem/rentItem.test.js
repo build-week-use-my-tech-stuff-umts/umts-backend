@@ -2,6 +2,7 @@ import request from 'supertest';
 import server from '../../api/server';
 
 const itemData = {
+  catId: 1,
   name: 'tes',
   description: 'test description',
   price: 10,
@@ -45,6 +46,27 @@ beforeAll(async () => {
   token2 = res.body.token;
 });
 
+describe('Category Endpoints', () => {
+  it('should create new Category', async () => {
+    const { statusCode, body } = await request(server)
+      .post('/api/categories')
+      .send({ name: 'Test' });
+    expect(statusCode).toEqual(201);
+    expect(body).toHaveProperty('category');
+  });
+  it('should respond with status code if category already exists', async () => {
+    const { statusCode, body } = await request(server)
+      .post('/api/categories')
+      .send({ name: 'Test' });
+    expect(statusCode).toEqual(409);
+    expect(body).toHaveProperty('status', 'error');
+  });
+  it('should get list of categories', async () => {
+    const { statusCode, body } = await request(server).get('/api/categories');
+    expect(statusCode).toEqual(200);
+    expect(body).toHaveProperty('categories');
+  });
+});
 describe('RentItem Endpoints', () => {
   it('should get the list of rent items', async () => {
     const { statusCode, body } = await request(server).get(BaseUrl);
@@ -116,11 +138,22 @@ describe('RentItem Endpoints', () => {
     expect(statusCode).toEqual(400);
     expect(body).toHaveProperty('status', 'error');
   });
-  it("should fail if user attempts to delete another use's item", async () => {
+
+  it('should delete the item', async () => {
+
+
     const { statusCode, body } = await request(server)
       .delete(`${BaseUrl}/1`)
       .set('Authorization', authToken);
     expect(statusCode).toEqual(200);
     expect(body).toHaveProperty('message');
   });
+
+
+  it('should get list of items for a given category', async () => {
+    const { statusCode, body } = await request(server).get(`${BaseUrl}/1/categories`);
+    expect(statusCode).toEqual(200);
+    expect(body).toHaveProperty('category.rentItems');
+  });
+
 });
