@@ -73,3 +73,19 @@ export const updateRentItem = async (req, res, next) => {
     next(error);
   }
 };
+
+export const deleteRentItem = async (req, res, next) => {
+  try {
+    const { rentItem, user } = req;
+    if (rentItem.owner.id !== user.id) {
+      throw new ErrorHandler(400, 'You can only delete your own item');
+    }
+    const deleted = await rentItem.destroy();
+    if (!deleted) {
+      throw new ErrorHandler(500, 'An Unknown error occurred while trying to  the item');
+    }
+    response(res, { message: 'success' }, 200);
+  } catch (error) {
+    next(error);
+  }
+};
