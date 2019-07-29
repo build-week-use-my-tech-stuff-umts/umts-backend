@@ -23,9 +23,8 @@ beforeAll(async () => {
     .send(userData);
   const { body } = await request(server)
     .post('/api/auth/login')
-    .send(userData);
+    .send({ email: userData.email, password: userData.password });
   authToken = body.token;
-  console.log('token', authToken);
 });
 
 describe('RentItem Endpoints', () => {
@@ -58,13 +57,11 @@ describe('RentItem Endpoints', () => {
     expect(body).toHaveProperty('item');
   });
   it('should respond with 404 if item does not exist', async () => {
-    const { statusCode } = await request(server)
-      .get(`${BaseUrl}/10`);
+    const { statusCode } = await request(server).get(`${BaseUrl}/10`);
     expect(statusCode).toEqual(404);
   });
   it('should respond with 200 if item exists', async () => {
-    const { statusCode } = await request(server)
-      .get(`${BaseUrl}/1`);
+    const { statusCode } = await request(server).get(`${BaseUrl}/1`);
     expect(statusCode).toEqual(200);
   });
 });
