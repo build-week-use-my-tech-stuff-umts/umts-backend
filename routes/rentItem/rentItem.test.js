@@ -113,7 +113,6 @@ describe('RentItem Endpoints', () => {
     expect(statusCode).toEqual(400);
     expect(body).toHaveProperty('status', 'error');
   });
-
   it('should fail if the item does not exist', async () => {
     const { statusCode, body } = await request(server)
       .put(`${BaseUrl}/2`)
@@ -139,7 +138,10 @@ describe('RentItem Endpoints', () => {
     expect(statusCode).toEqual(400);
     expect(body).toHaveProperty('status', 'error');
   });
+
   it('should delete the item', async () => {
+
+
     const { statusCode, body } = await request(server)
       .delete(`${BaseUrl}/1`)
       .set('Authorization', authToken);
@@ -147,9 +149,11 @@ describe('RentItem Endpoints', () => {
     expect(body).toHaveProperty('message');
   });
 
+
   it('should get list of items for a given category', async () => {
     const { statusCode, body } = await request(server).get(`${BaseUrl}/1/categories`);
     expect(statusCode).toEqual(200);
     expect(body).toHaveProperty('category.rentItems');
   });
+
 });
