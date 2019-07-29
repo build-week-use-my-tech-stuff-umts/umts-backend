@@ -1,0 +1,18 @@
+# Description of work done
+- 
+
+# How to run automated test on the feature
+- `git clone https://github.com/build-week-use-my-tech-stuff-umts/umts-backend.git  && cd umts-backend `
+- `npm install`
+- `touch .env`
+- `cp .env.example .env`
+- npm test
+
+# How to test on POSTMAN
+- `cp .env.example .env`
+- `npm run migrate`
+- `npm run seed`
+- `npm run start:dev`
+- Head to POSTMAN and test the endpoints following the [API docs](https://documenter.getpostman.com/view/4448465/SVYkw1n2?version=latest)
+
+# Test coverage screenshot
