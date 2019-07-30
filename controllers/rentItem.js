@@ -13,10 +13,10 @@ import response from '../helpers';
 export const addNewItem = async (req, res, next) => {
   try {
     const item = await models.RentItem.create({ ...req.body, userId: req.user.id });
-    if (!item) {
-      throw new ErrorHandler(500, 'Internal server error');
+    if (item) {
+      return response(res, { item }, 201);
     }
-    return response(res, { item }, 201);
+    throw new ErrorHandler(500, 'Internal server error');
   } catch (error) {
     return next(error);
   }
@@ -65,10 +65,10 @@ export const updateRentItem = async (req, res, next) => {
       throw new ErrorHandler(400, 'You can only update your own item');
     }
     const updatedItem = await rentItem.update(body);
-    if (!updatedItem) {
-      throw new ErrorHandler(500, 'An Unknown error occurred while trying to update the item');
+    if (updatedItem) {
+      response(res, { item: updatedItem }, 200);
     }
-    response(res, { item: updatedItem }, 200);
+    throw new ErrorHandler(500, 'An Unknown error occurred while trying to update the item');
   } catch (error) {
     next(error);
   }
@@ -81,10 +81,10 @@ export const deleteRentItem = async (req, res, next) => {
       throw new ErrorHandler(400, 'You can only delete your own item');
     }
     const deleted = await rentItem.destroy();
-    if (!deleted) {
-      throw new ErrorHandler(500, 'An Unknown error occurred while trying to  the item');
+    if (deleted) {
+      response(res, { message: 'success' }, 200);
     }
-    response(res, { message: 'success' }, 200);
+    throw new ErrorHandler(500, 'An Unknown error occurred while trying to  the item');
   } catch (error) {
     next(error);
   }

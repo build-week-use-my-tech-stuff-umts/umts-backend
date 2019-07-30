@@ -39,3 +39,24 @@ export const loginValidationRules = () => [
     .isEmpty()
     .withMessage('Password is required'),
 ];
+
+export const profileValidationRules = () => [
+  body('firstName')
+    .not()
+    .isEmpty()
+    .withMessage('first Name is required'),
+  body('lastName')
+    .not()
+    .isEmpty()
+    .withMessage('last Name is required'),
+  body('email')
+    .not()
+    .isEmpty()
+    .isEmail()
+    .normalizeEmail()
+    .withMessage('Invalid email address provided'),
+  body('phone')
+    .optional({ nullable: true })
+    .isMobilePhone()
+    .withMessage('Invalid phone number'),
+];

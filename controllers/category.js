@@ -14,10 +14,10 @@ export const getCategoryItems = async (req, res, next) => {
         },
       ],
     });
-    if (!category) {
-      throw new ErrorHandler(404, 'Category with the specified ID does not exist');
+    if (category) {
+      response(res, { category, message: 'success' }, 200);
     }
-    response(res, { category, message: 'success' }, 200);
+    throw new ErrorHandler(404, 'Category with the specified ID does not exist');
   } catch (error) {
     next(error);
   }
@@ -26,7 +26,10 @@ export const getCategoryItems = async (req, res, next) => {
 export const getAllCategories = async (req, res, next) => {
   try {
     const categories = await models.Category.findAll();
-    response(res, { categories }, 200);
+    if (categories) {
+      response(res, { categories }, 200);
+    }
+    throw new ErrorHandler(400, 'No category found');
   } catch (error) {
     next(error);
   }
