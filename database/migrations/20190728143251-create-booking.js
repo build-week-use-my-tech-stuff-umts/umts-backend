@@ -25,7 +25,7 @@ module.exports = {
       type: Sequelize.DATE,
     },
     pickupTime: {
-      type: Sequelize.DATE,
+      type: Sequelize.STRING,
     },
     pickupLocation: {
       type: Sequelize.STRING,

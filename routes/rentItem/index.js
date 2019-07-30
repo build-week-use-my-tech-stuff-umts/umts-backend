@@ -14,6 +14,8 @@ import {
 import { getCategoryItems, getAllCategories, createCategory } from '../../controllers/category';
 import isAuthenticated from '../../middleware/auth';
 import validateItemId from '../../middleware/rentItem';
+import bookingValidationRules from '../../validators/rules/booking';
+import bookItem from '../../controllers/booking';
 
 const router = Router();
 
@@ -33,6 +35,7 @@ router.delete('/rentItems/:itemId', isAuthenticated, validateItemId, deleteRentI
 router.get('/rentItems/:catId/categories', getCategoryItems);
 router.get('/categories', getAllCategories);
 router.post('/categories', catValidationRules(), validate, createCategory);
+
 router.post(
   '/rentItems/:itemId/reviews',
   isAuthenticated,
@@ -40,5 +43,14 @@ router.post(
   reviewValidationRules(),
   validate,
   addReview,
+);
+
+router.post(
+  '/rentItems/:itemId/bookings',
+  isAuthenticated,
+  bookingValidationRules(),
+  validate,
+  validateItemId,
+  bookItem,
 );
 export default router;
