@@ -2,12 +2,14 @@ import { Router } from 'express';
 import validate from '../../validators';
 import validationRules from '../../validators/rules/rentItem';
 import catValidationRules from '../../validators/rules/category';
+import reviewValidationRules from '../../validators/rules/review';
 import {
   addNewItem,
   getAllItems,
   getRentItemById,
   updateRentItem,
   deleteRentItem,
+  addReview,
 } from '../../controllers/rentItem';
 import { getCategoryItems, getAllCategories, createCategory } from '../../controllers/category';
 import isAuthenticated from '../../middleware/auth';
@@ -31,4 +33,12 @@ router.delete('/rentItems/:itemId', isAuthenticated, validateItemId, deleteRentI
 router.get('/rentItems/:catId/categories', getCategoryItems);
 router.get('/categories', getAllCategories);
 router.post('/categories', catValidationRules(), validate, createCategory);
+router.post(
+  '/rentItems/:itemId/reviews',
+  isAuthenticated,
+  validateItemId,
+  reviewValidationRules(),
+  validate,
+  addReview,
+);
 export default router;
