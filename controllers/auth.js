@@ -52,3 +52,16 @@ export async function login(req, res, next) {
     next(error);
   }
 }
+
+export const updateProfile = async (req, res, next) => {
+  try {
+    const updatedUser = await req.user.update({ ...req.body, password: req.user.password });
+    if (updatedUser) {
+      const { password: pass, ...userData } = updatedUser.get();
+      formatResponse(res, { user: userData, message: 'success' }, 200);
+    }
+    throw new Error('Internal server error');
+  } catch (error) {
+    next(error);
+  }
+};

@@ -8,7 +8,7 @@ const userData = {
   firstName: 'jon',
   lastName: 'doe',
 };
-
+let authToken;
 describe('Register Endpoint', () => {
   it('should fail if validation fails', async () => {
     const { statusCode, body } = await request(app)
@@ -57,9 +57,22 @@ describe('Login Endpoint', () => {
       const { statusCode, body } = await request(app)
         .post(`${BASE_URL}/login`)
         .send({ email: 'test@test.com', password: 'test12' });
+      authToken = body.token;
       expect(statusCode).toEqual(200);
       expect(body).toHaveProperty('user');
       expect(body).toHaveProperty('token');
+    } catch (error) {
+      return null;
+    }
+  });
+  it('should update user profile', async () => {
+    try {
+      const { statusCode, body } = await request(app)
+        .put(`${BASE_URL}/profile`)
+        .set('Authorization', authToken)
+        .send({ ...userData, city: 'test city' });
+      expect(statusCode).toEqual(200);
+      expect(body).toHaveProperty('user.city', 'test city');
     } catch (error) {
       return null;
     }
