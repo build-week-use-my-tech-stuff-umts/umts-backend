@@ -14,8 +14,8 @@
     "test": "export NODE_ENV=test && jest --detectOpenHandles --testTimeout=10000 --forceExit",
     "pretest": "export NODE_ENV=test && npm run migrate:reset",
     "coveralls": "npm run pretest && jest --coverage --detectOpenHandles --testTimeout=10000 && cat ./coverage/lcov.info | coveralls",
-    "seed": "sequelize db:seed:all",  
-    "seed:undo": "sequelize db:seed:undo:all"  
+    "seed": "sequelize db:seed:all",
+    "seed:undo": "sequelize db:seed:undo:all"
   },
   "jest": {
     "testEnvironment": "node",
@@ -44,6 +44,7 @@
     "express-error-bouncer": "^1.0.1",
     "express-validator": "^6.1.1",
     "jsonwebtoken": "^8.5.1",
+    "moment": "^2.24.0",
     "pg": "^7.11.0",
     "pg-hstore": "^2.3.3",
     "sequelize": "^5.10.3",

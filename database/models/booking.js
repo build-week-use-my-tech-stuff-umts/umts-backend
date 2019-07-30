@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
       itemId: DataTypes.INTEGER,
       startDate: DataTypes.DATE,
       endDate: DataTypes.DATE,
-      pickupTime: DataTypes.DATE,
+      pickupTime: DataTypes.STRING,
       pickupLocation: DataTypes.STRING,
       status: DataTypes.ENUM('pending', 'paid', 'canceled'),
     },

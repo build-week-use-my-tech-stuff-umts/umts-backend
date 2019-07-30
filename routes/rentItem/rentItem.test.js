@@ -164,6 +164,47 @@ describe('Review Endpoint', () => {
   });
 });
 
+describe('BOOKINGS', () => {
+  const booking = {
+    quantity: 2,
+    startDate: '2019-08-06 20:12:44',
+    endDate: '2019-08-04 20:12:44',
+    pickupTime: '4 pm',
+    pickupLocation: 'no where',
+  };
+  it('should fail if validation fails', async () => {
+    const { statusCode, body } = await request(server)
+      .post(`${BaseUrl}/1/bookings`)
+      .set('Authorization', token2)
+      .send({});
+    expect(statusCode).toEqual(422);
+    expect(body).toHaveProperty('errors');
+  });
+  it('should fail if user is not authenticated', async () => {
+    const { statusCode, body } = await request(server)
+      .post(`${BaseUrl}/1/bookings`)
+      .send(booking);
+    expect(statusCode).toEqual(403);
+    expect(body).toHaveProperty('status', 'error');
+  });
+  it('should fail if itemId id invalid', async () => {
+    const { statusCode, body } = await request(server)
+      .post(`${BaseUrl}/ggshgh/bookings`)
+      .set('Authorization', token2)
+      .send(booking);
+    expect(statusCode).toEqual(500);
+    expect(body).toHaveProperty('status', 'error');
+  });
+  it('should create a booking', async () => {
+    const { statusCode, body } = await request(server)
+      .post(`${BaseUrl}/1/bookings`)
+      .set('Authorization', token2)
+      .send(booking);
+    expect(statusCode).toEqual(201);
+    expect(body).toHaveProperty('booking');
+  });
+});
+
 describe('DELETE Item', () => {
   it("should fail if user attempts to delete another use's item", async () => {
     const { statusCode, body } = await request(server)
