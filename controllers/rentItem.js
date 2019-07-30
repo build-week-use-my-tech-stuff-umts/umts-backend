@@ -89,3 +89,23 @@ export const deleteRentItem = async (req, res, next) => {
     next(error);
   }
 };
+
+export const addReview = async (req, res, next) => {
+  try {
+    const { user, rentItem } = req;
+    if (rentItem.owner.id === user.id) {
+      throw new ErrorHandler(400, 'you cannot review your own item');
+    }
+    const review = await models.Review.create({
+      ...req.body,
+      itemId: rentItem.id,
+      userId: user.id,
+    });
+    if (!review) {
+      throw new ErrorHandler(500, 'Unable to save review');
+    }
+    response(res, { message: 'success', review }, 201);
+  } catch (error) {
+    next(error);
+  }
+};

@@ -131,6 +131,40 @@ describe('RentItem Endpoints', () => {
     expect(body).toHaveProperty('item');
   });
 
+  it('should get list of items for a given category', async () => {
+    const { statusCode, body } = await request(server).get(`${BaseUrl}/1/categories`);
+    expect(statusCode).toEqual(200);
+    expect(body).toHaveProperty('category.rentItems');
+  });
+});
+describe('Review Endpoint', () => {
+  it('should fail if validation fails', async () => {
+    const { statusCode, body } = await request(server)
+      .post(`${BaseUrl}/1/reviews`)
+      .set('Authorization', token2)
+      .send({});
+    expect(statusCode).toEqual(422);
+    expect(body).toHaveProperty('errors');
+  });
+  it('should fail if user tries to review own item', async () => {
+    const { statusCode, body } = await request(server)
+      .post(`${BaseUrl}/1/reviews`)
+      .set('Authorization', authToken)
+      .send({ rating: '2', comment: 'bla bla' });
+    expect(statusCode).toEqual(400);
+    expect(body).toHaveProperty('status', 'error');
+  });
+  it('should create a new review', async () => {
+    const { statusCode, body } = await request(server)
+      .post(`${BaseUrl}/1/reviews`)
+      .set('Authorization', token2)
+      .send({ rating: '2', comment: 'bla bla' });
+    expect(statusCode).toEqual(201);
+    expect(body).toHaveProperty('review');
+  });
+});
+
+describe('DELETE Item', () => {
   it("should fail if user attempts to delete another use's item", async () => {
     const { statusCode, body } = await request(server)
       .delete(`${BaseUrl}/1`)
@@ -145,11 +179,5 @@ describe('RentItem Endpoints', () => {
       .set('Authorization', authToken);
     expect(statusCode).toEqual(200);
     expect(body).toHaveProperty('message');
-  });
-
-  it('should get list of items for a given category', async () => {
-    const { statusCode, body } = await request(server).get(`${BaseUrl}/1/categories`);
-    expect(statusCode).toEqual(200);
-    expect(body).toHaveProperty('category.rentItems');
   });
 });
