@@ -13,6 +13,7 @@ module.exports = {
         msg: 'Category name is required',
       },
     },
+    imageUrl: Sequelize.STRING,
     createdAt: {
       allowNull: false,
       type: Sequelize.DATE,
