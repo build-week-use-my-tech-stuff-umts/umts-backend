@@ -74,6 +74,10 @@ export const getUserDetails = async (req, res, next) => {
         {
           model: models.RentItem,
           as: 'rentItems',
+          include: {
+            model: models.Category,
+            as: 'category',
+          },
         },
         {
           model: models.Booking,
