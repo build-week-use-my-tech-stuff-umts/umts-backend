@@ -65,3 +65,29 @@ export const updateProfile = async (req, res, next) => {
     next(error);
   }
 };
+
+export const getUserDetails = async (req, res, next) => {
+  try {
+    const user = await models.User.findOne({
+      where: { id: req.user.id },
+      include: [
+        {
+          model: models.RentItem,
+          as: 'rentItems',
+        },
+        {
+          model: models.Booking,
+          as: 'bookings',
+        },
+      ],
+    });
+    if (user) {
+      const { password: pass, ...userData } = user.get();
+      formatResponse(res, { user: userData, message: 'success' }, 200);
+    } else {
+      throw new Error(404, 'User not found');
+    }
+  } catch (error) {
+    next(error);
+  }
+};
