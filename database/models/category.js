@@ -3,6 +3,7 @@ module.exports = (sequelize, DataTypes) => {
     'Category',
     {
       name: DataTypes.STRING,
+      imageUrl: DataTypes.STRING,
     },
     {},
   );

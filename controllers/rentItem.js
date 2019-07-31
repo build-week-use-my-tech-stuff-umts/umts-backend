@@ -41,6 +41,10 @@ export const getAllItems = async (req, res, next) => {
           model: models.Review,
           as: 'reviews',
         },
+        {
+          model: models.Category,
+          as: 'category',
+        },
       ],
       order: [['createdAt', 'DESC']],
     });
