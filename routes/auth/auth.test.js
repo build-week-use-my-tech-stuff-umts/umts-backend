@@ -77,4 +77,15 @@ describe('Login Endpoint', () => {
       return null;
     }
   });
+  it('should get authenticated use details', async () => {
+    try {
+      const { statusCode, body } = await request(app)
+        .get(`${BASE_URL}/user`)
+        .set('Authorization', authToken);
+      expect(statusCode).toEqual(200);
+      expect(body).toHaveProperty('user');
+    } catch (error) {
+      return null;
+    }
+  });
 });
