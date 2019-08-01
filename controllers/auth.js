@@ -95,3 +95,32 @@ export const getUserDetails = async (req, res, next) => {
     next(error);
   }
 };
+
+export const updatePassword = async (req, res, next) => {
+  try {
+    const { email, oldPassword, newPassword } = req.body;
+    const user = await models.User.findOne({ where: { email } });
+    if (!user) {
+      throw new ErrorHandler(401, 'Invalid credentials');
+    }
+    const isValidPassword = bcrypt.compareSync(oldPassword, user.password);
+    if (isValidPassword) {
+      const hashedPassword = bcrypt.hashSync(newPassword, 10);
+      const updatedUser = user.update({
+        password: hashedPassword,
+      });
+      if (updatedUser) {
+        return formatResponse(
+          res,
+          {
+            message: 'success',
+          },
+          200,
+        );
+      }
+    }
+    throw new ErrorHandler(401, 'Incorrect password');
+  } catch (error) {
+    next(error);
+  }
+};
