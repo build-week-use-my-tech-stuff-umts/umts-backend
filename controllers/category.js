@@ -40,6 +40,7 @@ export const createCategory = async (req, res, next) => {
     const { name } = req.body;
     const [category, created] = await models.Category.findOrCreate({
       where: { name },
+      defaults: req.body,
     });
     if (!created && category) {
       throw new ErrorHandler(409, 'Category already exists');
