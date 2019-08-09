@@ -16,7 +16,6 @@ export const addNewItem = async (req, res, next) => {
     if (item) {
       return response(res, { item }, 201);
     }
-    throw new ErrorHandler(500, 'Internal server error');
   } catch (error) {
     return next(error);
   }
@@ -105,9 +104,6 @@ export const addReview = async (req, res, next) => {
       itemId: rentItem.id,
       userId: user.id,
     });
-    if (!review) {
-      throw new ErrorHandler(500, 'Unable to save review');
-    }
     response(res, { message: 'success', review }, 201);
   } catch (error) {
     next(error);

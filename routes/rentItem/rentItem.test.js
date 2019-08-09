@@ -96,6 +96,7 @@ describe('RentItem Endpoints', () => {
     expect(statusCode).toEqual(201);
     expect(body).toHaveProperty('item');
   });
+
   it('should respond with 404 if item does not exist', async () => {
     const { statusCode } = await request(server).get(`${BaseUrl}/10`);
     expect(statusCode).toEqual(404);
